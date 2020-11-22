@@ -1,0 +1,22 @@
+from collections import defaultdict 
+
+if __name__ == '__main__':
+    nm = input().split()
+    n = int(nm[0])#Number of words in group A
+    m = int(nm[1])#Number of words in group B
+    words = []
+    d = defaultdict(list)
+    
+    for _ in range(n + m):#Taking inputs
+        words += input().split()
+
+    for i in range(n,len(words)):#Iterating through elements of group B
+        for j in range(n):#Iterating through elements of group A
+            if words[i] == words[j]:
+                d[words[i]].append(j+1)#If the elements are equal then append it to the dictionary
+        if len(d[words[i]]) == 0:#If there is no match then append -1
+            d[words[i]].append(-1)
+    
+        for i in sorted(set(d[words[i]])):#Using the sorted method to get back the ordering of the elements of the original list and using set to remove all the duplicates
+            print(i, end = ' ')
+        print()
